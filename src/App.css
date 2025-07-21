@@ -1,0 +1,57 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/*Login Page */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #212121 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #ffffff;
+}
+
+
+/* Dashboard */
+.dashboard-card-large {
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.dashboard-card-large:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional: Make heading and text slightly smaller on small devices */
+@media (max-width: 576px) {
+  .dashboard-card-large h4 {
+    font-size: 1.25rem;
+  }
+
+  .dashboard-card-large p {
+    font-size: 0.875rem;
+  }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+  }
+}
