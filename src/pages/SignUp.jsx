@@ -20,7 +20,7 @@ function SignUp() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://stockit-backend-9ug9.onrender.com/api/auth/signup",
         form
       );
       setMsg("User Registered Successfully !!");

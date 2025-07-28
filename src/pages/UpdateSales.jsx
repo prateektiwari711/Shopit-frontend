@@ -10,7 +10,7 @@ const UpdateSales = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/stock/update-sales",
+        "https://stockit-backend-9ug9.onrender.com/api/stock/update-sales",
         {
           itemName,
           quantity: parseInt(quantitySold),

@@ -11,7 +11,7 @@ function AddStock() {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/stock/add-stock",
+        "https://stockit-backend-9ug9.onrender.com/api/stock/add-stock",
         { itemName, price: parseFloat(price), quantity: parseInt(quantity) },
         { headers: { Authorization: token } }
       );

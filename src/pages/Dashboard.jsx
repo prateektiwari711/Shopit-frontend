@@ -14,7 +14,7 @@ function Dashboard() {
 
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/auth/dashboard",
+          "https://stockit-backend-9ug9.onrender.com/api/auth/dashboard",
           {
             headers: { Authorization: token },
           }

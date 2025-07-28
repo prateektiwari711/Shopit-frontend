@@ -17,7 +17,7 @@ const CheckStock = () => {
   const fetchStock = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/stock/check-stock",
+        "https://stockit-backend-9ug9.onrender.com/api/stock/check-stock",
         { headers: { Authorization: token } }
       );
       setStock(res.data);
@@ -33,9 +33,12 @@ const CheckStock = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/stock/delete/${id}`, {
-        headers: { Authorization: token },
-      });
+      await axios.delete(
+        `https://stockit-backend-9ug9.onrender.com/api/stock/delete/${id}`,
+        {
+          headers: { Authorization: token },
+        }
+      );
       fetchStock();
     } catch (err) {
       alert("Failed to delete");
@@ -55,7 +58,7 @@ const CheckStock = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/api/stock/update/${editingItem}`,
+        `https://stockit-backend-9ug9.onrender.com/api/stock/update/${editingItem}`,
         {
           ...updatedItem,
           quantity: parseInt(updatedItem.quantity),
