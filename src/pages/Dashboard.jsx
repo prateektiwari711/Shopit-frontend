@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FaPlus, FaBoxes, FaChartLine } from "react-icons/fa";
+import { FaPlus, FaBoxes, FaChartLine, FaBoxOpen } from "react-icons/fa";
+
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 function Dashboard() {
   const [msg, setMsg] = useState("");
@@ -13,12 +15,9 @@ function Dashboard() {
       if (!token) return setMsg("Unauthorized");
 
       try {
-        const res = await axios.get(
-          "https://stockit-backend-9ug9.onrender.com/api/auth/dashboard",
-          {
-            headers: { Authorization: token },
-          }
-        );
+        const res = await axios.get(`${backendURL}/api/auth/dashboard`, {
+          headers: { Authorization: token },
+        });
         setMsg(res.data.message);
       } catch (err) {
         setMsg("Error fetching data");
@@ -49,6 +48,13 @@ function Dashboard() {
       icon: <FaChartLine size={80} />,
       bg: "#0f5132",
       path: "/update-sales",
+    },
+    {
+      title: "Place Order",
+      text: "Place order for items which are less in your stcok",
+      icon: <FaBoxOpen size={80} />,
+      bg: "#0f5132",
+      path: "/sellers",
     },
   ];
 

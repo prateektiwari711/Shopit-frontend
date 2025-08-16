@@ -11,6 +11,9 @@ import AddStock from "./pages/AddStock";
 import CheckStock from "./pages/CheckStock";
 import UpdateSales from "./pages/UpdateSales";
 import { AuthProvider } from "./store/AuthContext";
+import PlaceOrder from "./pages/PlaceOrder";
+import AddSeller from "./pages/AddSeller";
+import Sellers from "./pages/Sellers";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             <Route path="/add-stock" element={<AddStock />} />
             <Route path="/check-stock" element={<CheckStock />} />
             <Route path="/update-sales" element={<UpdateSales />} />
+            <Route path="/sellers" element={<Sellers />} />
+            <Route path="/add-seller" element={<AddSeller />} />
+            <Route path="/place-order" element={<PlaceOrder />} />
           </Routes>
         </div>
       </Router>

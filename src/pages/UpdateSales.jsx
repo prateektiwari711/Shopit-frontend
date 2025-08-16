@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 const UpdateSales = () => {
   const [itemName, setItemName] = useState("");
   const [quantitySold, setQuantitySold] = useState("");
@@ -10,7 +12,7 @@ const UpdateSales = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "https://stockit-backend-9ug9.onrender.com/api/stock/update-sales",
+        `${backendURL}/api/stock/update-sales`,
         {
           itemName,
           quantity: parseInt(quantitySold),

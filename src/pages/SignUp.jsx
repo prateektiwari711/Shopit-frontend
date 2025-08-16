@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 function SignUp() {
   const [form, setForm] = useState({
     name: "",
@@ -19,10 +21,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://stockit-backend-9ug9.onrender.com/api/auth/signup",
-        form
-      );
+      const res = await axios.post(`${backendURL}/api/auth/signup`, form);
       setMsg("User Registered Successfully !!");
     } catch (error) {
       setMsg(err.response?.data?.error || "SignUp failed");

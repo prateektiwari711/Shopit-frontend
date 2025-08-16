@@ -10,7 +10,6 @@ export default function NavBar() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check token on route change
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, [location]);

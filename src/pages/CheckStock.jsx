@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaEdit, FaSave, FaTimes, FaTrash } from "react-icons/fa";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 const CheckStock = () => {
   const [stock, setStock] = useState([]);
   const [search, setSearch] = useState("");
@@ -10,16 +12,16 @@ const CheckStock = () => {
     itemName: "",
     quantity: "",
     price: "",
+    lastUpdated: new Date().toISOString(),
   });
 
   const token = localStorage.getItem("token");
 
   const fetchStock = async () => {
     try {
-      const res = await axios.get(
-        "https://stockit-backend-9ug9.onrender.com/api/stock/check-stock",
-        { headers: { Authorization: token } }
-      );
+      const res = await axios.get(`${backendURL}/api/stock/check-stock`, {
+        headers: { Authorization: token },
+      });
       setStock(res.data);
     } catch (err) {
       alert("Error fetching stock");
@@ -33,12 +35,9 @@ const CheckStock = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
-      await axios.delete(
-        `https://stockit-backend-9ug9.onrender.com/api/stock/delete/${id}`,
-        {
-          headers: { Authorization: token },
-        }
-      );
+      await axios.delete(`${backendURL}/api/stock/delete/${id}`, {
+        headers: { Authorization: token },
+      });
       fetchStock();
     } catch (err) {
       alert("Failed to delete");
@@ -51,6 +50,7 @@ const CheckStock = () => {
       itemName: item.itemName,
       quantity: item.quantity,
       price: item.price,
+      lastUpdated: new Date().toISOString(),
     });
   };
 
@@ -58,16 +58,17 @@ const CheckStock = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://stockit-backend-9ug9.onrender.com/api/stock/update/${editingItem}`,
+        `${backendURL}/api/stock/update/${editingItem}`,
         {
           ...updatedItem,
           quantity: parseInt(updatedItem.quantity),
           price: parseFloat(updatedItem.price),
+          lastUpdated: new Date().toISOString(),
         },
         { headers: { Authorization: token } }
       );
+
       setEditingItem(null);
-      fetchStock();
     } catch (err) {
       alert("Update failed");
     }
@@ -210,11 +211,8 @@ const CheckStock = () => {
                   </div>
                   <small className="text-success text-opacity-50">
                     Last Updated:{" "}
-                    {!isNaN(new Date(item.lastUpdated))
-                      ? new Date(item.lastUpdated).toLocaleString("en-IN", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        })
+                    {item.lastUpdated
+                      ? new Date(item.lastUpdated).toLocaleString()
                       : "N/A"}
                   </small>
                 </>

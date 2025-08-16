@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 function LogIn() {
   const [form, setForm] = useState({
     email: "",
@@ -18,13 +20,10 @@ function LogIn() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://stockit-backend-9ug9.onrender.com/api/auth/login",
-        {
-          email: form.email,
-          password: form.password,
-        }
-      );
+      const res = await axios.post(`${backendURL}/api/auth/login`, {
+        email: form.email,
+        password: form.password,
+      });
 
       localStorage.setItem("token", res.data.token);
       setMsg("Login successful");
